@@ -39,11 +39,11 @@ export default function Display(props) {
                 {true ? <BaseBallPlayerHit /> : <BaseBallPlayerReady />}
                 <Container>
                     {props.play
-                        ? props.play.map(infoBit => (
+                        ? Object.keys(props.play).map(key => (
                               <div>
                                   <p>
-                                      {infoBit.name}{" "}
-                                      <span>{infoBit.number}</span>
+                                      {key.toUpperCase()}{" "}
+                                      <span>{String(props.play[key].current)}</span>
                                   </p>
                               </div>
                           ))
