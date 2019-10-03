@@ -50,7 +50,7 @@ export default function Display(props) {
                         : "Play info not created yet."}
                     <div>
                         <h3>Ball Speed</h3>
-                        <p>{props.ball ? props.ball.speed : "No info"}</p>
+                        <p>{props.ball ? props.ball.speed : " "}</p>
                     </div>
                 </Container>
             </Paper>
