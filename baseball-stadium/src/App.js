@@ -1,11 +1,12 @@
 import React from "react"
-import { Display } from "./components"
+import { Display, Dashboard } from "./components"
 import "./App.css"
 
 function App() {
     return (
         <div className="App">
             <Display />
+            <Dashboard />
         </div>
     )
 }
