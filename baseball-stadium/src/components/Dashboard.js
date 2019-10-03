@@ -1,15 +1,15 @@
 import React from "react";
-import { Button, ButtonGroup } from "@material-ui/core"
+import { Button, ButtonGroup, Container } from "@material-ui/core"
 
 export default function DashBoard(props) {
     return (
-        <div>
+        <Container maxWidth="md">
             <ButtonGroup color="primary">
                 <Button>HIT</Button>
                 <Button>FOUL</Button>
                 <Button>STRIKE</Button>
                 <Button>BALL</Button>
             </ButtonGroup>
-        </div>
+        </Container>
     )
 }
