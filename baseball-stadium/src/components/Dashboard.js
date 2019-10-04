@@ -8,8 +8,9 @@ import {
     ExpansionPanelDetails
 } from "@material-ui/core"
 import { ExpandMore as ExpandMoreIcon } from "@material-ui/icons"
+import PropTypes from "prop-types"
 
-export default function DashBoard(props) {
+export default function Dashboard(props) {
     return (
         <Container maxWidth="sm">
             <ExpansionPanel>
@@ -18,14 +19,28 @@ export default function DashBoard(props) {
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <ButtonGroup color="primary">
-                        <Button>HIT</Button>
-                        <Button onClick={() => props.updatePlay("foul")}>
+                        <Button
+                            data-testid="hit"
+                            onClick={() => props.updatePlay("hit")}
+                        >
+                            HIT
+                        </Button>
+                        <Button
+                            data-testid="foul"
+                            onClick={() => props.updatePlay("foul")}
+                        >
                             FOUL
                         </Button>
-                        <Button onClick={() => props.updatePlay("strike")}>
+                        <Button
+                            data-testid="strike"
+                            onClick={() => props.updatePlay("strikes")}
+                        >
                             STRIKE
                         </Button>
-                        <Button onClick={() => props.updatePlay("ball")}>
+                        <Button
+                            data-testid="ball"
+                            onClick={() => props.updatePlay("balls")}
+                        >
                             BALL
                         </Button>
                     </ButtonGroup>
@@ -33,4 +48,8 @@ export default function DashBoard(props) {
             </ExpansionPanel>
         </Container>
     )
+}
+
+Dashboard.propTypes = {
+    updatePlay: PropTypes.func
 }
