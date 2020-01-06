@@ -22,10 +22,10 @@ jobs:
         ls
         cd baseball-stadium
         ls
-        npm install
-        npm run build --if-present
-    - name: npm test
+        yarn install
+        yarn run build --if-present
+    - name: yarn test
       run: |
-        cd baseball-stadium && npm run actions-test
+        cd baseball-stadium && yarn run actions-test
       env:
         CI: true
