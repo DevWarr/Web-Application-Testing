@@ -1,26 +1,87 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react"
+import { Display, Dashboard } from "./components"
+import "./App.css"
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [batter, setBatter] = useState({
+        name: "Bobby",
+        stats: ["He sucks."]
+    })
+    const [play, setPlay] = useState({
+        strikes: { total: 3, current: 0 },
+        balls: { total: 4, current: 0 },
+        outs: { total: 3, current: 0 }
+    })
+    const [swing, setSwing] = useState(0)
+
+    /**
+     * Updates the scoreboard depending on what `type` of play was made
+     * @param type - A string (ex: `strike`, `hit`) referencing the type of play the batter made
+     */
+    const updatePlay = type => {
+        // Create and object copy, mutate it, then set it at the bottom of the function
+        const nextPlay = Object.assign({}, play);
+
+        /**
+         * Codes:
+         * 0 = nothing
+         * 1 = ball -> batter moves one base
+         * 2 = hit! -> batter runs to the bases
+         * -1 = strike! -> batter is out!
+         * -2 = outs! -> Team swaps!
+         */
+        let batter = 0;
+
+
+        switch(type) {
+            case "strikes":
+                nextPlay.strikes.current++;
+                if (nextPlay.strikes.current > 2) {
+                    nextPlay.strikes.current = 0
+                    nextPlay.balls.current = 0
+                    nextPlay.outs.current++
+                    batter = -1
+                }
+                if (nextPlay.outs.current > 2) {
+                    nextPlay.strikes.current = 0
+                    nextPlay.balls.current = 0
+                    nextPlay.outs.current = 0
+                    batter = -2
+                }
+                break;
+            case "balls":
+                nextPlay.balls.current++;
+                if (nextPlay.balls.current > 3) {
+                    nextPlay.strikes.current = 0
+                    nextPlay.balls.current = 0
+                    batter = 1
+                }
+                break;
+            case "hit":
+                nextPlay.strikes.current = 0
+                nextPlay.balls.current = 0
+                batter = 2
+                break;
+            case "foul":
+                if (play.strikes.current < 2) {
+                    nextPlay.strikes.current++
+                    break;
+                }
+                break;
+            default:
+                break;
+        }
+        // TODO: Add logic so batter success/failure is displayed somewhere
+        setSwing(batter)
+        setPlay(nextPlay);
+    }
+
+    return (
+        <div className="App">
+            <Display batter={batter} play={play} swing={swing}/>
+            <Dashboard updatePlay={updatePlay} />
+        </div>
+    )
 }
 
-export default App;
+export default App
