@@ -19,6 +19,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Install and build
       run: |
+        pwd
         cd baseball-stadium
         npm install
         npm run build --if-present
