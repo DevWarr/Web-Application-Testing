@@ -12,6 +12,7 @@ function App() {
         balls: { total: 4, current: 0 },
         outs: { total: 3, current: 0 }
     })
+    const [swing, setSwing] = useState(0)
 
     /**
      * Updates the scoreboard depending on what `type` of play was made
@@ -71,12 +72,13 @@ function App() {
                 break;
         }
         // TODO: Add logic so batter success/failure is displayed somewhere
+        setSwing(batter)
         setPlay(nextPlay);
     }
 
     return (
         <div className="App">
-            <Display batter={batter} play={play} />
+            <Display batter={batter} play={play} swing={swing}/>
             <Dashboard updatePlay={updatePlay} />
         </div>
     )

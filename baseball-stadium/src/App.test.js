@@ -2,7 +2,6 @@ import React from "react"
 import ReactDOM from "react-dom"
 import App from "./App"
 import * as rtl from "@testing-library/react";
-import { display } from "@material-ui/system";
 
 
 test("<App/> renders without crashing", () => {
